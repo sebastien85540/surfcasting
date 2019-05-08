@@ -1,0 +1,41 @@
+/*********************************************************
+*****                   STYLE                         ****
+*********************************************************/
+/*
+    - DOCUMENT: Surfcasting
+    - VERSION:  1.0.0
+    - AUTHOR:   Sebastien REYNAUD
+*/
+
+/*********************************************************
+*****                   NAVBAR                        ****
+*********************************************************/
+.navbar-start{
+    text-align: center !important;
+}
+/*********************************************************
+*****                   ACCUEIL                       ****
+*********************************************************/
+.accueil{
+    background-image: url(../images/coucher2.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 95vh;
+}
+
+.accueil h1{
+    text-align: center;
+    padding-top: 10%;
+}
+.accueil p{
+    text-align: center;
+    padding-bottom: 20px;
+}
+/*********************************************************
+*****                   CONTACT                       ****
+*********************************************************/
+
+.contact{
+    background-color: rgb(116, 245, 228);
+}
