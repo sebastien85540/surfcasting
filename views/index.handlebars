@@ -1,31 +1,32 @@
 <section id="accueil" class="accueil">
-        <div class="container">
-            <h1 class="title has-text-danger">Le Surfcasting en Vendée</h1>
-            <p class="subtitle has-text-danger">Bienvenus chers amis ce site est dispo pour poster vos photos, partager vos prises et laisser un petit post sur vos expèriences.</p>
-          {{#each posts}}
-        </div>
-        <div class="container">
-          <div class="columns">
-    
-            <div class="column">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="content">
-                    <a href="/articles/{{_id}}"><h2>{{title}}</h2></a>
-                      <p>{{content}}</p>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-               {{/each}}                 
+  <div class="container">
+    <h1 class="title has-text-danger">Le Surfcasting en Vendée</h1>
+    <p class="subtitle has-text-danger">Bienvenus chers amis ce site est dispo pour poster vos photos, partager vos
+      prises et laisser un petit post sur vos expèriences.</p>
+  </div>
+  <br>
+  <div class="container">
+    <div class="columns">
+      {{#each posts}}
+      <div class="column">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+            </figure>
           </div>
+          <div class="card-content">
+            <div class="content">
+              <a href="/articles/{{_id}}">
+                <h2>{{title}}</h2>
+              </a>
+              <p>{{content}}</p>
+              <p>publié par {{author}}, le {{moment createDate format="DD / MM / YYYY"}}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
-    
-    
+      {{/each}}
+    </div>
+  </div>
+</section>
