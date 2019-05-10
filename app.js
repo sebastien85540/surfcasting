@@ -3,9 +3,25 @@ const express = require('express')
     , mongoose = require('mongoose')
     , bodyParser = require('body-parser')
     , fileupload = require('express-fileupload')
-    , path = require('path');
+    , expressSession = require('express-session');
 
+// CONTROLLER
+// Article
+const articleSingleController = require('./controllers/articleSingle')
+    , createArticleController = require('./controllers/articleAdd')
+    , articlePostController = require('./controllers/articlePost')
+    , homePage = require('./controllers/homePage')
+// User
+const userCreate = require('./controllers/userCreate')
+    , userRegister = require('./controllers/userRegister')
+    , userLogin = require('./controllers/userLogin')
+    , userLoginAuth = require('./controllers/userLoginAuth')
 const app = express();
+
+app.use(expressSession({
+    secret: 'securite',
+    name: 'biscuit'
+}))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -18,56 +34,32 @@ mongoose.connect('mongodb://localhost:27017/surfcasting', { useNewUrlParser: tru
 var Handlebars = require("handlebars");
 var MomentHandler = require("handlebars.moment");
 MomentHandler.registerHelpers(Handlebars);
-// POST
-const post = require('./database/models/article')
 
 
 app.use(express.static('public'));
 //  ROUTE
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-// GET
-app.get('/', async (req, res) => {
-    const posts = await post.find({})
-    console.log(posts);
+// MIDDLEWARE
+const articleValidPost = require('./middleware/articleValidPost')
 
-    res.render("index",
-        { posts }
-    )
-})
+app.use("/articles/post", articleValidPost)
+// GET
+app.get('/', homePage)
 app.get('/contact', (req, res) => {
     res.render("contact")
 })
 
 // ARTICLES
-app.get("/articles/add", (req, res) => {
-    res.render("articles/add")
-})
-app.get("/articles/:id", async (req, res) => {
-    const article = await post.findById(req.params.id)
-    res.render('articles', {
-        article
-    })
-    // console.log(req.params);
+app.get("/articles/add", createArticleController)
+app.get("/articles/:id", articleSingleController)
+app.post("/articles/post", articlePostController)
+// Users
+app.get('/user/create', userCreate)
+app.post('/user/register', userRegister)
+app.get('/user/login', userLogin)
+app.post('/user/loginAuth', userLoginAuth)
 
-})
-app.post("/articles/post", (req, res) => {
-    // console.log(req.files);
-    const { image } = req.files
-    const uploadFile = path.resolve(__dirname, 'public/articles', image.name);
-    image.mv(uploadFile, (error) => {
-        post.create({
-            ...req.body,
-            image: `/articles/${image.name}`
-        },
-            (error, post) => {
-                res.redirect("/")
-            })
-        // console.log(req.body);
-
-    })
-
-})
 
 app.listen(3000, () => {
     console.log("server started on port 3000");
