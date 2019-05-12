@@ -1,23 +1,31 @@
 <section class="section">
     <div class="container is-fullhd">
+        <div class="content">
+            <ol type="1">
+                {{#each errors}}
+                <li>{{this}}</li>
+                {{/each}}
+
+            </ol>
+        </div>
         <form action="/user/register" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <label class="label">Nom</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Text input" name="name">
+                    <input class="input" type="text" placeholder="Text input" name="name" value={{data.name}}>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Prenom</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Text input" name="surname">
+                    <input class="input" type="text" placeholder="Text input" name="surname" value={{data.surname}}>
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Nom d'Usager</label>
                 <div class="control has-icons-left has-icons-right">
-                    <input class="input is-success" type="text" placeholder="Text input" value="bulma" name="userName">
+                    <input class="input is-success" type="text" placeholder="Text input" name="userName" value={{data.userName}}>
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
@@ -31,20 +39,16 @@
             <div class="field">
                 <label class="label">Email</label>
                 <div class="control has-icons-left has-icons-right">
-                    <input class="input is-danger" type="email" placeholder="Email input" value="hello@" name="email">
+                    <input class="input" type="email" placeholder="Email input" name="email" value={{data.email}}>
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
-                    <span class="icon is-small is-right">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </span>
                 </div>
-                <p class="help is-danger">This email is invalid</p>
             </div>
 
             <div class="field">
                 <p class="control has-icons-left">
-                    <input class="input" type="password" placeholder="Password" name="password">
+                    <input class="input" type="password" placeholder="Password" name="password" value={{data.password}}>
                     <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                     </span>
@@ -53,7 +57,7 @@
             <div class="field">
                 <div class="control">
                     <label class="checkbox">
-                        <input type="checkbox" name="terms">
+                        <input type="checkbox" name="terms" value={{data.terms}}>
                         I agree to the <a href="#">terms and conditions</a>
                     </label>
                 </div>

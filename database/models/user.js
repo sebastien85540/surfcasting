@@ -4,29 +4,29 @@ const bcrypt = require('bcrypt')
 const userShema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true,'le nom est obligatoire']
     },
     surname: {
         type: String,
-        required: true
+        required: [true, 'le prenom est obligatoire']
     },
     userName: {
         type: String,
-        required: true,
+        required: [true, "le nom d'utilisateur est obligatoire"],
         unique: true
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "l'email est obligatoire"],
         unique: true
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'le mot de passe est obligatoire']
     },
     terms: {
         type: String,
-        required: true
+        required: [true, 'les conditions sont obligatoires']
     },
 })
 userShema.pre('save', function (next) {

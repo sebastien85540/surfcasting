@@ -1,3 +1,6 @@
 module.exports = (req, res) => {
-    res.render("articles/add")
+    if (req.session.userId) {
+        return res.render("articles/add")
+    }
+    res.redirect("/user/login")
 }
