@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
     , mongoose = require('mongoose')
 
-const userShema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true,'le nom est obligatoire']
@@ -24,16 +24,16 @@ const userShema = new mongoose.Schema({
         type: String,
         required: [true, 'le mot de passe est obligatoire']
     },
-    terms: {
-        type: String,
-        required: [true, 'les conditions sont obligatoires']
-    },
+    // terms: {
+    //     type: String,
+    //     required: [true, 'les conditions sont obligatoires']
+    // },
 })
-userShema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
     const user = this
     bcrypt.hash(user.password, 10, (error, encrypted) => {
         user.password = encrypted
         next()
     })
 })
-module.exports = mongoose.model('user', userShema)
+module.exports = mongoose.model('user', userSchema)

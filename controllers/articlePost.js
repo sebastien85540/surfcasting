@@ -1,5 +1,7 @@
+
+const post = require('../database/models/article')
+
 const path = require('path')
-    , post = require('../database/models/article')
 module.exports = (req, res) => {
     // console.log(req.files);
     const { image } = req.files
@@ -7,7 +9,7 @@ module.exports = (req, res) => {
     image.mv(uploadFile, (error) => {
         post.create({
             ...req.body,
-            image: `/articles/${image.name}`
+            image: `../articles/${image.name}`
         },
             (error, post) => {
                 res.redirect("/")

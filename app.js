@@ -6,7 +6,7 @@ const express = require('express')
     , expressSession = require('express-session')
     , MongoStore = require('connect-mongo')
     , connectFlash = require('connect-flash')
-    , {stipTags} = require('./helpers/hbs');
+    , {stripTags} = require('./helpers/hbs');
 
 // CONTROLLER
 // Article
@@ -22,12 +22,19 @@ const userCreate = require('./controllers/userCreate')
     , userLogout = require('./controllers/userLogout')
     
 const app = express();
-mongoose.connect('mongodb://localhost:27017/surfcasting', { useNewUrlParser: true } );
+// MONGODB
+const db = require('./config/keys.js').MongoURI
+
+mongoose
+    .set('useCreateIndex', true)
+    .connect(db,  {useNewUrlParser: true})
+    .then(() => console.log('Connect MongoDB Cloud'))
+    .catch(err => console.log(err));
 
 
 const mongoStore = MongoStore(expressSession)
 
-app.use(connectFlash)
+app.use(connectFlash())
 
 app.use(expressSession({
     secret: 'securite',
@@ -59,7 +66,7 @@ app.use(express.static('public'));
 //  ROUTE
 app.engine('handlebars', exphbs({
     helpers:{
-        stripTags: stipTags
+        stripTags: stripTags
         
     },
     defaultLayout: 'main'
@@ -99,7 +106,7 @@ app.get('/contact', (req, res) => {
 app.use((req, res) => {
     res.render('error404')
 })
-app.listen(3000, () => {
-    console.log("server started on port 3000");
+app.listen(3300, () => {
+    console.log("server started on port 3300");
 
 })

@@ -16,8 +16,8 @@ module.exports = (req, res) => {
                     res.redirect('/user/login')
                 }
             })
-        } else {
-            return res.redirect('/user/login')
-        }
+         } else {
+             return res.redirect('/user/login')
+         }
     })
 }

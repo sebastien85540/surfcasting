@@ -39,3 +39,26 @@
 .contact{
     background-color: rgb(116, 245, 228);
 }
+
+/*********************************************************
+*****                   CONTACT                       ****
+*********************************************************/
+
+.footer{
+    background-color: #000000;
+    height: 30px;
+    color: #fff;
+    
+}
+
+
+/*********************************************************
+*****                   ERROR 404                     ****
+*********************************************************/
+
+.error{
+    background-image: url(../images/error-404.jpg);
+    background-repeat: no-repeat;
+    height: 80vh;
+    background-size: cover;
+}
