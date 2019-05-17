@@ -106,7 +106,7 @@ app.get('/contact', (req, res) => {
 app.use((req, res) => {
     res.render('error404')
 })
-app.listen(3300, () => {
+app.listen(process.env.PORT ||3300, () => {
     console.log("server started on port 3300");
 
 })
