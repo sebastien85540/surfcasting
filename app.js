@@ -31,6 +31,7 @@ mongoose
     .then(() => console.log('Connect MongoDB Cloud'))
     .catch(err => console.log(err));
 
+// mongoose.connect('mongodb://localhost:27017/surcasting', {useNewUrlParser: true});
 
 const mongoStore = MongoStore(expressSession)
 
